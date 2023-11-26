@@ -1,13 +1,9 @@
 import Head from 'next/head';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
-import Link from 'next/link'
 import { getSortedPostsData } from '../lib/posts';
 
 export async function getStaticProps() {
-  /**
-   * getStaticProps only runs on the server-side you won’t be able to use data that’s only available during request time, such as query parameters or HTTP headers.
-   */
   const allPostsData = getSortedPostsData();
   return {
     props: {
@@ -34,12 +30,12 @@ export default function Home({allPostsData}) {
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
-            <Link href={`/posts/${id}`}>{title}</Link>
-            <br />
-            <small className={utilStyles.lightText}>
-              {/* <Date dateString={date} /> */}
-            </small>
-          </li>
+              {title}
+              <br />
+              {id}
+              <br />
+              {date}
+            </li>
           ))}
         </ul>
       </section>
